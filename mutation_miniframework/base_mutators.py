@@ -1,16 +1,16 @@
-from mutation_operators.Dataset import *
+from Dataset import *
 #Base functions
 '''
 This is a base function, meant to assist the actual operators.
 It returns (new addition to new file name, new data)
 '''
 def replaceSubString(dataset : Dataset, substring, replacement, count=-1):
-    for key, captions in dataset.items():
-        captionsBuffer = []
-        for caption in captions:
-            captions : str
-            captionsBuffer.append(caption.replace(substring, replacement, count))
-        dataset[key] = captionsBuffer
+    for key, texts in dataset.items():
+        textsBuffer = []
+        for text in texts:
+            texts : str
+            textsBuffer.append(text.replace(substring, replacement, count))
+        dataset[key] = textsBuffer
 
 '''
 This is a base function, meant to assist the actual operators.
@@ -18,18 +18,18 @@ It returns (new addition to new file name, new data)
 '''
 import re
 def replaceWords(dataset : Dataset, word_list : dict, count=1):
-    for key, captions in dataset.items():
-        captionsBuffer = []
-        for caption in captions:
-            caption : str
+    for key, texts in dataset.items():
+        textsBuffer = []
+        for text in texts:
+            text : str
             amountToReplace = count
             for word, replacement in word_list.items():
-                (caption, numReplaced) = re.subn(word, replacement, caption, amountToReplace)
+                (text, numReplaced) = re.subn(word, replacement, text, amountToReplace)
                 amountToReplace -= numReplaced
                 if amountToReplace <= 0:
                     break
-            captionsBuffer.append(caption)
-        dataset[key] = captionsBuffer
+            textsBuffer.append(text)
+        dataset[key] = textsBuffer
 
 import requests, json
 def getSynonymAPI(word) -> str:

@@ -1,66 +1,66 @@
-from mutation_operators.Dataset import *
-from mutation_operators.base_mutators import *
+from Dataset import *
+from base_mutators import *
 
 #Mutation Operators
 '''
 Saves new file output with added functional name additions
 '''
 import random
-def misspellWords(dataset : Dataset, word_list : dict, mutation="misspell", per_caption_limit=1):
-    replaceWords(dataset, word_list, per_caption_limit)
+def misspellWords(dataset : Dataset, word_list : dict, mutation="misspell", word_change_limit=1):
+    replaceWords(dataset, word_list, word_change_limit)
     dataset.saveDataMutation(mutation)
 '''
 Takes an article and adds spaces between to replace
 '''
-def replaceArticles(dataset : Dataset, articles : dict, mutation="articleSub", per_caption_limit=1):
-    replaceWords(dataset, articles, per_caption_limit)
+def replaceArticles(dataset : Dataset, articles : dict, mutation="articleSub", word_change_limit=1):
+    replaceWords(dataset, articles, word_change_limit)
     dataset.saveDataMutation(mutation)
 
-def replaceSynonym(dataset : Dataset, words_to_replace : list, mutation="synonymSub", per_caption_limit=1):
+def replaceSynonym(dataset : Dataset, words_to_replace : list, mutation="synonymSub", word_change_limit=1):
     word_list = {}
     for word in words_to_replace:
         word_list[word] = getSynonymAPI(word)
-    replaceWords(dataset, word_list, per_caption_limit)
+    replaceWords(dataset, word_list, word_change_limit)
     dataset.saveDataMutation(mutation)
 
-def replaceInCaptionRandomSynonym(dataset : Dataset, mutation="randSynonym", per_caption_limit=1):
+def replaceInTextsRandomSynonym(dataset : Dataset, mutation="randSynonym", word_change_limit=1):
     word_list = {}
-    for key, caption in dataset.items():
-        for word in caption.split(" "):
+    for key, texts in dataset.items():
+        for word in texts.split(" "):
             word_list[word] = getSynonymAPI(word)
-    replaceWords(dataset, word_list, per_caption_limit)
+    replaceWords(dataset, word_list, word_change_limit)
     dataset.saveDataMutation(mutation)
 
-def replaceInCaptionAntonym(dataset : Dataset, words_to_replace : list, mutation="antonym", per_caption_limit=1):
+def replaceInTextsAntonym(dataset : Dataset, words_to_replace : list, mutation="antonym", word_change_limit=1):
     word_list = {}
     for word in words_to_replace:
         word_list[word] = getAntonymAPI(word)
-    replaceWords(dataset, word_list, per_caption_limit)
+    replaceWords(dataset, word_list, word_change_limit)
     dataset.saveDataMutation(mutation)
 
-def replaceInCaptionRandomAntonym(dataset : Dataset, mutation="randAntonym", per_caption_limit=1):
+def replaceInTextsRandomAntonym(dataset : Dataset, mutation="randAntonym", word_change_limit=1):
     word_list = {}
-    for key, caption in dataset.items():
-        for word in caption.split(" "):
+    for key, texts in dataset.items():
+        for word in texts.split(" "):
             word_list[word] = getAntonymAPI(word)
-    replaceWords(dataset, word_list, per_caption_limit)
+    replaceWords(dataset, word_list, word_change_limit)
     dataset.saveDataMutation(mutation)
 
 '''
 Replaces an adjective with another
 '''
-def replaceInCaptionRandomAdjective(dataset : Dataset, per_caption_limit=1):
+def replaceInTextsRandomAdjective(dataset : Dataset, word_change_limit=1):
     pass
 
 '''
 Replaces a verb with another
 '''
-def replaceInCaptionRandomVerb(dataset : Dataset, per_caption_limit=1):
+def replaceInTextsRandomVerb(dataset : Dataset, word_change_limit=1):
     pass
 
-def deleteRandomArticle(dataset : Dataset, articles : list, mutation="delArticles", per_caption_limit=1):
+def deleteRandomArticle(dataset : Dataset, articles : list, mutation="delArticles", word_change_limit=1):
     word_list = {}
     for article in articles:
         word_list[article] = " "
-    replaceWords(dataset, word_list, per_caption_limit)
+    replaceWords(dataset, word_list, word_change_limit)
     dataset.saveDataMutation(mutation)

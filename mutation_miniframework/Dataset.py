@@ -71,7 +71,7 @@ class Dataset:
 
 
 '''
-Purely for reformatting the previous dataset.
+NOT FOR USE, Purely for reformatting a specific previous dataset used by the author.
 '''
 def parseTxt1ByCaption(lines : list, by_image : bool) -> dict:
     data = {}
