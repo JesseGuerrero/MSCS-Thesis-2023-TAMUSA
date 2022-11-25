@@ -1,147 +1,224 @@
-# This is a illustration of how we might finetune the RoBERTa-based detector
-# There will be syntax errors, but the logic should be correct.
-import json
-import numpy as np
+# The pre-trained roberta-based detector may only works w/
+# - Huggingface version 2.9.1 (i.e., ```transformers==2.9.1```)
+# - ```tokenizers==0.7.0```
+# !pip install transformers==2.9.1
 
 import os
-import torch
+import csv
+import time
 import tqdm
+# from tqdm.notebook import trange
+from tqdm import trange
+import math
+import numpy as np
+import torch
 from torch import nn, optim
 from transformers import RobertaForSequenceClassification, RobertaTokenizer
 
-from mutation_miniframework.Dataset import Dataset
+import utils as U
+from mutation_miniframework.Dataset import *
+from mutation_miniframework.operators import deleteRandomArticle, replaceLetters, misspellWords
 
-roberta_detector_ckpt_dir = './'
+misspellings = {}
+with open("../mutation_miniframework/mutation_data/misspellings.json") as misspellingsJSON:
+	misspellingsBuffer = dict(json.load(misspellingsJSON))
+	for word, misspellList in misspellingsBuffer.items():
+		misspellings[word] = misspellList[0]
+
+project_data_path = "./test"
+
+text_data_path = os.path.join(project_data_path, 'data_10k', 'Parsed')
+real_text_dir = os.path.join(text_data_path, 'train_val_test/real')
+fake_text_dir = os.path.join(text_data_path, 'train_val_test/mutation')
+text_file_fake = 'MutationTinyCOCOCaption.json'
+text_file_mutation = 'HumanTinyCOCOCaption.json'
+# text_file_fake = '10kcaption1.txt'
+# text_file_real = 'HumanCOCOTest10k.txt'
+
+ckpt_dir = os.path.join(project_data_path, "ckpt")
+output_path = os.path.join(ckpt_dir, "COCO-Finetune-RoBERTa-Based-Detector")
+if(not os.path.exists(output_path)):
+	print("Making Dir...\n\t%s" %output_path)
+	os.makedirs(output_path)
+
+roberta_detector_ckpt_dir = os.path.join(ckpt_dir, 'RoBERTa-Based-Detector')
 roberta_detector_ckpt_name = 'detector-large.pt'
-roberta_detector_ckpt_path = os.path.join(roberta_detector_ckpt_dir, roberta_detector_ckpt_name)
-
+roberta_detector_ckpt_path = os.path.join(roberta_detector_ckpt_dir,
+										  roberta_detector_ckpt_name)
 roberta_detector_ckpt_url = 'https://openaipublic.azureedge.net/gpt-2/detector-models/v1/detector-large.pt'
 
-device = "cuda" if torch.cuda.is_available() else "cpu"
-
 # Download RoBERTa-based Detector ckpt if needed
-if(not os.path.exists(roberta_detector_ckpt_path)):
-  print("No RoBERTa!")
-  exit(0)
-# if (not os.path.exists(roberta_detector_ckpt_path)):
-#   if(not os.path.exists(roberta_detector_ckpt_dir)):
-#     os.makedirs(roberta_detector_ckpt_dir)
-#   download_roberta_ckpt(ckpt_url, roberta_detector_ckpt_path)
+if (not os.path.exists(roberta_detector_ckpt_path)):
+	if(not os.path.exists(roberta_detector_ckpt_dir)):
+		print("Making Dir...\n\t%s" %roberta_detector_ckpt_dir)
+		os.makedirs(roberta_detector_ckpt_dir)
+	U.download_roberta_ckpt(roberta_detector_ckpt_url,
+							roberta_detector_ckpt_path)
+
+# Load data
+train_data = U.load_data(real_text_dir, text_file_mutation,
+						 fake_text_dir, text_file_fake,
+						 train_test_split='train')
+val_data = U.load_data(real_text_dir, text_file_mutation,
+					   fake_text_dir, text_file_fake,
+					   train_test_split='val')
+test_data = U.load_data(real_text_dir, text_file_mutation,
+						fake_text_dir, text_file_fake,
+						train_test_split='test')
+
+# set hyperparameters
+batch_size = 1
+epochs = 50
+learning_rate = 0.0001
+finetune_embeddings = False
+device = "cuda" if torch.cuda.is_available() else "cpu"
 
 # Initiate pre-trained RoBERTa-based Detector
 ckpt = torch.load(roberta_detector_ckpt_path) # checkpoint for pre-trained reberta detector
 model = RobertaForSequenceClassification.from_pretrained('roberta-large')
 tokenizer = RobertaTokenizer.from_pretrained('roberta-large')
 model.load_state_dict(ckpt['model_state_dict'])
-model.to(device)
-model : RobertaForSequenceClassification
+model = model.to(device)
 
+# Freeze roberta weights (i.e., the embedding weights)
+# leave the classifier tunable
+for p in model.roberta.parameters():
+	p.requires_grad = finetune_embeddings
 
-# binary cross-entropy loss
 BCE = nn.BCELoss()
+loss_function = nn.CrossEntropyLoss()
+optimizer = optim.SGD(model.parameters(), lr=learning_rate, momentum=0.9)
 
-# SGD optimizer (you may also try Adam and others),
-# make sure to play with the learning rate to find one works
-optimizer = optim.SGD(model.parameters(), lr=0.001, momentum=0.9)
+## Train Loop ##
+t = trange(epochs, desc="", position=0, leave=True)
 
-# split the dataset into train, val, test (70% : 10%: 20%)
-# use the train_captions to train the model
+phases = ["train", "val"]
+best_val_acc = 0
+best_epoch = 0
+train_hist = []
+val_hist = []
 
-with open("../humanCOCOSmall.json", "r") as f:
-  data = dict(json.load(f))
-  dataset = Dataset(data, ["showcase"])
+from random import randrange
+for e in t:
+	model.to(device)
+	for phase in phases:
 
-for epoch in range(10):
+		## Initialization ##
+		if(phase == "train"):
+			model.train()
+			data = np.array(train_data)
+			np.random.shuffle(data)
+		else:
+			model.eval()
+			data = np.array(val_data)
 
-  ## train the model ##
+		epoch_loss = 0
+		epoch_correct_pred = 0
+		step_per_epoch = math.floor(len(data) / batch_size)
+
+		## Train/Val Loop ##
+		for i in range(step_per_epoch):
+			# Load one batch of data
+			# batch size might have to be 1 due to varying caption length
+			cur_data = data[i*batch_size:(i+1)*batch_size]
+			cur_names = cur_data[:,0]
+			cur_captions = cur_data[:,1]
+			cur_labels = cur_data[:,2].astype(np.int8)#Mutation is 0, real is 1
+
+			# Generate mutation
+			# if need to generate mutation, add code here
+			# print("DATA " + str(cur_data))
+			dataDict = {}
+			if(cur_labels == 0):
+				dataDict[0] = [str(cur_captions)]
+				choice = randrange(0, 3)
+				mutatedCaptionData = Dataset(dataDict, [""])
+				if choice == 0:
+					deleteRandomArticle(mutatedCaptionData, [" a ", " an ", " the ", " is "], "", word_change_limit=3)
+				if choice == 1:
+					replaceLetters(mutatedCaptionData, {
+						"a": "α",
+						"e": "ε"
+					}, "", word_change_limit=3)
+				if choice == 2:
+					misspellWords(mutatedCaptionData, misspellings, "", word_change_limit=3)
+				if choice == 3:
+					pass
+				if choice == 4:
+					pass
+				if choice == 5:
+					pass
+				if choice == 6:
+					pass
+				# print("MUTATION " + mutatedCaptionData[0][0])
+				cur_data[:,1] = mutatedCaptionData[0][0]
+
+			# Tokenize captions
+			cur_token_ids = [tokenizer.encode(item) for item in cur_data[:,1]]
+			cur_masks = [np.ones(len(item)) for item in cur_token_ids]
+
+			# Convert to tensor and send data to device
+			cur_token_ids = torch.tensor(np.array(cur_token_ids)).to(device)
+			cur_labels = torch.tensor(np.array(cur_labels)).long().to(device)
+			cur_masks = torch.tensor(np.array(cur_masks)).to(device)
+
+			# For training
+			if(phase == "train"):
+				optimizer.zero_grad()
+				logits = model(cur_token_ids, attention_mask=cur_masks)
+				loss = loss_function(logits[0], cur_labels)
+				loss.backward()
+				optimizer.step()
+				# scheduler may be needed in the future
+
+			# For validation
+			else:
+				with torch.no_grad():
+					logits = model(cur_token_ids, attention_mask=cur_masks)
+					loss = loss_function(logits[0], cur_labels)
+
+			# Track current performance
+			# Count correct prediciton
+			for kk in range(len(cur_labels)):
+				prob = logits[0][kk].softmax(dim=-1)
+				pred = torch.argmax(prob.detach().cpu())
+				if(pred==cur_labels[kk]):
+					epoch_correct_pred +=  1.0
+			# Add current loss to total epoch loss
+			epoch_loss += loss.item()
+
+			# Update progress bar
+			t.set_description("Epoch/Step: %i/%i[Phase:%s]  Loss:%.4f  CorrectPred:%.4f [%i/%i]"
+				% (e, i, phase, loss.item(), epoch_correct_pred/(i+1), epoch_correct_pred, (i+1)))
 
 
-  #model.train()
+		## Compute epoch performance ##
+		epoch_acc = epoch_correct_pred / (step_per_epoch * batch_size)
+		epoch_loss = epoch_loss / step_per_epoch
 
-  # assume train_captions is lists of captions
-  # random the train_captions set for each epoch
-  # use np.random.shuffle
+		if(phase=="train"):
+			train_hist.append([epoch_loss, epoch_acc])
+			np.save(os.path.join(output_path,"train_hist.npy"),
+					np.asarray(train_hist))
 
+		else:
+			val_hist.append([epoch_loss, epoch_acc])
+			np.save(os.path.join(output_path,"val_hist.npy"),
+					np.asarray(val_hist))
 
-  for chunk in tqdm.tqdm(dataset.items()):
-    # load K instances to form a train batch
-    caption_batch_human = []
-    caption_batch_machine = []
-    mask_human = []
-    mask_machine = []
-    print(chunk[0])
-    print(chunk[1])
+		if(phase == "val"):
+			if(epoch_acc>best_val_acc):
+				best_val_acc = epoch_acc
+				best_epoch = e
+				print("Epoch:%d Acc:%.4f higher than the previous best performance"
+					  %(e, best_val_acc))
+				print("Saving ckpt...")
+				# save the CKPT
+				torch.save(model.cpu().state_dict(),
+						   os.path.join(output_path,"base.pt"))
 
-    for i in range(100):
-      img_name, chunk = (chunk[0], chunk[1])
+	print("\nEpoch:%d   Train Loss/Acc: %.4f/%.4f   Val Loss/ACC %.4f/%.4f"
+		  %(e, train_hist[e][0], train_hist[e][1], val_hist[e][0], val_hist[e][1]))
 
-      # form the human text batch
-      tokens = tokenizer.encode(chunk)
-      tokens = torch.Tensor(tokens)
-      tokens = tokens.unsqueeze(0).long().to(device)
-      mask = torch.ones_like(tokens).long().to(device)
-
-      caption_batch_human.append([[tokens], [mask], 0]) # after the for-loop, we should have a K-by-3 list.
-                                                        # 1st column: text embedding
-                                                        # 2nd column: attention mask
-                                                        # 3rd column: label for human or machine
-
-      # form the machine text batch
-      machine_caption = mutation(chunk) # random apply one mutation operator
-
-      tokens = tokenizer.encode(machine_caption)
-      tokens = torch.Tensor(tokens)
-      tokens = tokens.unsqueeze(0).long().to(device)
-      mask = torch.ones_like(tokens).long().to(device)
-      caption_batch_machine.append([[tokens], 1])
-
-    # concatenate two lists together
-    caption_batch =  caption_batch_human + caption_batch_machine # the lenght of the list should be 2K-by-3
-    np.random.shuffle(caption_batch) # we don't want all the human text together, and all machine text together
-
-    # split the list to data, mask and label
-    data = caption_batch[:,0]
-    attention_mask = caption_batch[:,1]
-    label = caption_batch[:,2]
-
-    # train the model
-    optimizer.zero_grad()
-    logits = model(data, attention_mask=attention_mask)
-    loss = BCE(logits, label) # gt_label: ground truth label, i.e., whether the text is human of machine
-    loss.backward()
-    optimizer.step()
-
-    # get predicted result
-    probs = logits[0].softmax(dim=-1)
-    probs = probs.detach().cpu().flatten().numpy()
-    result = np.argmax(probs)
-
-    # use sklearn to calculate accuracy
-
-    # might print accuracy periodically
-
-  ## validate the model ##
-  model.eval()
-  with torch.no_grad():
-    for chunk in tqdm.tqdm(val_captions):
-      # load K instances to form a train batch
-      for i in range(k):
-        ...
-      # concatenate two lists together
-      # split the list to data, mask and label
-      # val the model
-      logits = model(val_data, attention_mask=attention_mask)
-      # get predicted result
-      probs = logits[0].softmax(dim=-1)
-      probs = probs.detach().cpu().flatten().numpy()
-      result = np.argmax(probs)
-
-      # use sklearn to calculate accuracy
-
-      # depending on the accuracy, you may want to save the ckpt
-      # in-general, we want to use val to find the training ckpt that with the
-      # highest val accuracy
-
-# After the training is completed and the best model is selected based on Val Acc
-# Test the model, ensentially the same with what you did before.
-# The only difference is to use the finetuned CKPT instead of the RoBERTa provided one
+torch.save(model.cpu().state_dict(),
+		   os.path.join(output_path,"base_"+str(e)+".pt"))

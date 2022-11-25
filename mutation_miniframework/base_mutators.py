@@ -1,4 +1,4 @@
-from Dataset import *
+from mutation_miniframework.Dataset import *
 #Base functions
 '''
 This is a base function, meant to assist the actual operators.

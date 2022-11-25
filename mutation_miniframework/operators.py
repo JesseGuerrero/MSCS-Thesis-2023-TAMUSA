@@ -1,11 +1,11 @@
-from Dataset import *
-from base_mutators import *
+from mutation_miniframework.base_mutators import *
 
 #Mutation Operators
 '''
 Saves new file output with added functional name additions
 '''
-import random
+
+
 def misspellWords(dataset : Dataset, word_list : dict, mutation="misspell", word_change_limit=1):
     replaceWords(dataset, word_list, word_change_limit)
     dataset.saveDataMutation(mutation)
@@ -16,14 +16,18 @@ def replaceArticles(dataset : Dataset, articles : dict, mutation="articleSub", w
     replaceWords(dataset, articles, word_change_limit)
     dataset.saveDataMutation(mutation)
 
-def replaceSynonym(dataset : Dataset, words_to_replace : list, mutation="synonymSub", word_change_limit=1):
+def replaceLetters(dataset : Dataset, articles : dict, mutation="letterReplace", word_change_limit=1):
+    replaceWords(dataset, articles, word_change_limit)
+    dataset.saveDataMutation(mutation)
+
+def replaceSynonymAPI(dataset : Dataset, words_to_replace : list, mutation="synonymSub", word_change_limit=1):
     word_list = {}
     for word in words_to_replace:
         word_list[word] = getSynonymAPI(word)
     replaceWords(dataset, word_list, word_change_limit)
     dataset.saveDataMutation(mutation)
 
-def replaceInTextsRandomSynonym(dataset : Dataset, mutation="randSynonym", word_change_limit=1):
+def replaceInTextsRandomSynonymAPI(dataset : Dataset, mutation="randSynonym", word_change_limit=1):
     word_list = {}
     for key, texts in dataset.items():
         for word in texts.split(" "):
@@ -31,14 +35,14 @@ def replaceInTextsRandomSynonym(dataset : Dataset, mutation="randSynonym", word_
     replaceWords(dataset, word_list, word_change_limit)
     dataset.saveDataMutation(mutation)
 
-def replaceInTextsAntonym(dataset : Dataset, words_to_replace : list, mutation="antonym", word_change_limit=1):
+def replaceInTextsAntonymAPI(dataset : Dataset, words_to_replace : list, mutation="antonym", word_change_limit=1):
     word_list = {}
     for word in words_to_replace:
         word_list[word] = getAntonymAPI(word)
     replaceWords(dataset, word_list, word_change_limit)
     dataset.saveDataMutation(mutation)
 
-def replaceInTextsRandomAntonym(dataset : Dataset, mutation="randAntonym", word_change_limit=1):
+def replaceInTextsRandomAntonymAPI(dataset : Dataset, mutation="randAntonym", word_change_limit=1):
     word_list = {}
     for key, texts in dataset.items():
         for word in texts.split(" "):

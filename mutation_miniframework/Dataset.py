@@ -73,18 +73,3 @@ class Dataset:
 '''
 NOT FOR USE, Purely for reformatting a specific previous dataset used by the author.
 '''
-def parseTxt1ByCaption(lines : list, by_image : bool) -> dict:
-    data = {}
-    if by_image:
-        for line in lines:
-            if line.split(":")[0] in data:
-                data[line.split(":")[0]][0] = (data[line.split(":")[0]][0] + line.split(":")[1].replace("\n", " "))
-            if line.split(":")[0] not in data:
-                data[line.split(":")[0]] = [line.split(":")[1].replace("\n", " ")]
-    if not by_image:
-        for line in lines:
-            if line.split(":")[0] in data:
-                data[line.split(":")[0]].append(line.split(":")[1].replace("\n", ""))
-            if line.split(":")[0] not in data:
-                data[line.split(":")[0]] = [line.split(":")[1].replace("\n", "")]
-    return data
