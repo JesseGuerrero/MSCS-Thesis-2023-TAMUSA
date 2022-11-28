@@ -31,6 +31,23 @@ def replaceWords(dataset : Dataset, word_list : dict, count=1):
             textsBuffer.append(text)
         dataset[key] = textsBuffer
 
+import random
+def replaceWordsByDoubleList(dataset : Dataset, word_list : list, count=1):
+    for key, texts in dataset.items():
+        textsBuffer = []
+        for text in texts:
+            text : str
+            amountToReplace = count
+            words = text.split(" ")
+            for word in words:
+                if(word in word_list):
+                    (text, numReplaced) = re.subn(word, random.choice(word_list), text, amountToReplace)
+                    amountToReplace -= numReplaced
+                if amountToReplace <= 0:
+                    break
+            textsBuffer.append(text)
+        dataset[key] = textsBuffer
+
 import requests, json
 def getSynonymAPI(word) -> str:
     with open("./mutation_data/synonyms.json", "r+") as f:
@@ -48,7 +65,11 @@ def getSynonymAPI(word) -> str:
 
         response = requests.request("GET", url, headers=headers)
         print(dict(response.json()))
-        synonyms = response.json()['synonyms']
+        synonyms=[]
+        try:
+            synonyms = response.json()['synonyms']
+        except KeyError:
+            synonyms = []
         local_synonyms[word] = synonyms
         f.seek(0)
         f.write((json.dumps(local_synonyms)))
@@ -72,7 +93,11 @@ def getAntonymAPI(word) -> str:
         }
 
         response = requests.request("GET", url, headers=headers)
-        antonyms = response.json()['antonyms']
+        antonyms = []
+        try:
+            antonyms = response.json()['antonyms']
+        except KeyError:
+            antonyms = []
         local_antonyms[word] = antonyms
         f.seek(0)
         f.write((json.dumps(local_antonyms)))

@@ -1,1 +1,1484 @@
-{}
+{
+  "a": [],
+  "abandon": [],
+  "ability": [
+    "inability"
+  ],
+  "able": [
+    "unable"
+  ],
+  "abortion": [],
+  "about": [],
+  "above": [
+    "below"
+  ],
+  "abroad": [],
+  "absence": [
+    "presence"
+  ],
+  "absolute": [
+    "relative"
+  ],
+  "absolutely": [],
+  "absorb": [
+    "emit"
+  ],
+  "abuse": [],
+  "academic": [],
+  "accept": [
+    "refuse",
+    "reject"
+  ],
+  "access": [],
+  "accident": [],
+  "accompany": [],
+  "accomplish": [],
+  "according": [],
+  "account": [],
+  "accurate": [
+    "inaccurate"
+  ],
+  "accuse": [],
+  "achieve": [],
+  "achievement": [],
+  "acid": [],
+  "acknowledge": [],
+  "acquire": [],
+  "across": [],
+  "act": [
+    "refrain"
+  ],
+  "action": [
+    "inaction"
+  ],
+  "active": [
+    "stative",
+    "inactive",
+    "passive",
+    "extinct",
+    "dormant",
+    "quiet"
+  ],
+  "activist": [],
+  "activity": [
+    "inactivity"
+  ],
+  "actor": [],
+  "actress": [],
+  "actual": [
+    "potential"
+  ],
+  "actually": [],
+  "ad": [],
+  "adapt": [],
+  "add": [
+    "subtract",
+    "take away"
+  ],
+  "addition": [
+    "subtraction"
+  ],
+  "additional": [],
+  "address": [],
+  "adequate": [
+    "inadequate"
+  ],
+  "adjust": [],
+  "adjustment": [],
+  "administration": [],
+  "administrator": [],
+  "admire": [
+    "look down on"
+  ],
+  "admission": [],
+  "admit": [
+    "exclude",
+    "reject",
+    "deny"
+  ],
+  "adolescent": [],
+  "adopt": [],
+  "adult": [
+    "juvenile"
+  ],
+  "advance": [
+    "recede",
+    "retreat",
+    "back"
+  ],
+  "advanced": [],
+  "advantage": [
+    "disadvantage"
+  ],
+  "adventure": [],
+  "advertising": [],
+  "advice": [],
+  "advise": [],
+  "adviser": [],
+  "advocate": [],
+  "affair": [],
+  "affect": [],
+  "afford": [],
+  "afraid": [
+    "unafraid"
+  ],
+  "African": [],
+  "African-American": [],
+  "after": [],
+  "afternoon": [],
+  "again": [],
+  "against": [],
+  "age": [
+    "rejuvenate"
+  ],
+  "agency": [],
+  "agenda": [],
+  "agent": [],
+  "aggressive": [
+    "unaggressive"
+  ],
+  "ago": [],
+  "agree": [
+    "disagree"
+  ],
+  "agreement": [
+    "disagreement"
+  ],
+  "agricultural": [],
+  "ah": [],
+  "ahead": [
+    "back"
+  ],
+  "aid": [],
+  "aide": [],
+  "AIDS": [],
+  "aim": [],
+  "air": [],
+  "aircraft": [],
+  "airline": [],
+  "airport": [],
+  "album": [],
+  "alcohol": [],
+  "alive": [
+    "dead"
+  ],
+  "all": [
+    "no",
+    "some"
+  ],
+  "alliance": [],
+  "allow": [
+    "deny",
+    "disallow"
+  ],
+  "ally": [],
+  "almost": [],
+  "alone": [],
+  "along": [],
+  "already": [],
+  "also": [],
+  "alter": [],
+  "alternative": [],
+  "although": [],
+  "always": [],
+  "AM": [],
+  "amazing": [],
+  "American": [],
+  "among": [],
+  "amount": [],
+  "analysis": [
+    "synthesis"
+  ],
+  "analyst": [],
+  "analyze": [
+    "synthesize"
+  ],
+  "ancient": [],
+  "and": [],
+  "anger": [],
+  "angle": [],
+  "angry": [
+    "unangry"
+  ],
+  "animal": [],
+  "anniversary": [],
+  "announce": [],
+  "annual": [
+    "biennial",
+    "perennial"
+  ],
+  "another": [],
+  "answer": [
+    "question"
+  ],
+  "anticipate": [],
+  "anxiety": [],
+  "any": [],
+  "anybody": [],
+  "anymore": [],
+  "anyone": [],
+  "anything": [],
+  "anyway": [],
+  "anywhere": [],
+  "apart": [],
+  "apartment": [],
+  "apparent": [],
+  "apparently": [],
+  "appeal": [],
+  "appear": [
+    "disappear"
+  ],
+  "appearance": [
+    "disappearance"
+  ],
+  "apple": [],
+  "application": [],
+  "apply": [],
+  "appoint": [],
+  "appointment": [],
+  "appreciate": [
+    "depreciate"
+  ],
+  "approach": [],
+  "appropriate": [
+    "inappropriate"
+  ],
+  "approval": [
+    "disapproval"
+  ],
+  "approve": [
+    "disapprove"
+  ],
+  "approximately": [],
+  "Arab": [],
+  "architect": [],
+  "area": [],
+  "argue": [],
+  "argument": [],
+  "arise": [
+    "lie down",
+    "sit down"
+  ],
+  "arm": [
+    "disarm"
+  ],
+  "armed": [
+    "armless",
+    "unarmed"
+  ],
+  "army": [],
+  "around": [],
+  "arrange": [
+    "disarrange"
+  ],
+  "arrangement": [],
+  "arrest": [],
+  "arrival": [],
+  "arrive": [
+    "leave"
+  ],
+  "art": [],
+  "article": [],
+  "artist": [],
+  "artistic": [],
+  "as": [],
+  "Asian": [],
+  "aside": [],
+  "ask": [],
+  "asleep": [
+    "awake"
+  ],
+  "aspect": [],
+  "assault": [],
+  "assert": [],
+  "assess": [],
+  "assessment": [],
+  "asset": [
+    "liability"
+  ],
+  "assign": [],
+  "assignment": [],
+  "assist": [],
+  "assistance": [],
+  "assistant": [],
+  "associate": [
+    "dissociate"
+  ],
+  "association": [
+    "disassociation"
+  ],
+  "assume": [],
+  "assumption": [],
+  "assure": [],
+  "at": [],
+  "athlete": [],
+  "athletic": [],
+  "atmosphere": [],
+  "attach": [
+    "detach"
+  ],
+  "attack": [
+    "defend"
+  ],
+  "attempt": [],
+  "attend": [
+    "miss"
+  ],
+  "attention": [
+    "inattention"
+  ],
+  "attitude": [],
+  "attorney": [],
+  "attract": [
+    "repel"
+  ],
+  "attractive": [
+    "repulsive",
+    "unattractive"
+  ],
+  "attribute": [],
+  "audience": [],
+  "author": [],
+  "authority": [],
+  "auto": [],
+  "available": [
+    "unavailable"
+  ],
+  "average": [],
+  "avoid": [
+    "confront"
+  ],
+  "award": [],
+  "aware": [
+    "unaware"
+  ],
+  "awareness": [],
+  "away": [
+    "home"
+  ],
+  "awful": [],
+  "baby": [],
+  "back": [
+    "ahead",
+    "front",
+    "advance",
+    "veer"
+  ],
+  "background": [
+    "foreground"
+  ],
+  "bad": [
+    "good"
+  ],
+  "badly": [
+    "well"
+  ],
+  "bag": [],
+  "bake": [],
+  "balance": [
+    "unbalance",
+    "imbalance"
+  ],
+  "ball": [],
+  "ban": [],
+  "band": [],
+  "bank": [],
+  "bar": [
+    "unbar"
+  ],
+  "barely": [],
+  "barrel": [],
+  "barrier": [],
+  "base": [],
+  "baseball": [],
+  "basic": [
+    "incidental"
+  ],
+  "basically": [],
+  "basis": [],
+  "basket": [],
+  "basketball": [],
+  "bathroom": [],
+  "battery": [],
+  "battle": [],
+  "be": [],
+  "beach": [],
+  "bean": [],
+  "bear": [
+    "bull"
+  ],
+  "beat": [],
+  "beautiful": [
+    "ugly"
+  ],
+  "beauty": [
+    "ugliness"
+  ],
+  "because": [],
+  "become": [],
+  "bed": [],
+  "bedroom": [],
+  "beer": [],
+  "before": [],
+  "begin": [
+    "end"
+  ],
+  "beginning": [
+    "middle",
+    "end",
+    "ending"
+  ],
+  "behavior": [],
+  "behind": [],
+  "being": [
+    "nonbeing"
+  ],
+  "belief": [
+    "unbelief"
+  ],
+  "believe": [
+    "disbelieve"
+  ],
+  "bell": [],
+  "belong": [],
+  "below": [
+    "above"
+  ],
+  "belt": [
+    "unbelt"
+  ],
+  "bench": [],
+  "bend": [
+    "unbend",
+    "straighten"
+  ],
+  "beneath": [],
+  "benefit": [],
+  "beside": [],
+  "besides": [],
+  "best": [
+    "worst"
+  ],
+  "bet": [],
+  "better": [
+    "worsen",
+    "worse"
+  ],
+  "between": [],
+  "beyond": [],
+  "Bible": [],
+  "big": [
+    "little",
+    "small"
+  ],
+  "bike": [],
+  "bill": [],
+  "billion": [],
+  "bind": [
+    "unbind"
+  ],
+  "biological": [
+    "adoptive"
+  ],
+  "bird": [],
+  "birth": [
+    "death"
+  ],
+  "birthday": [],
+  "bit": [],
+  "bite": [],
+  "black": [
+    "white"
+  ],
+  "blade": [],
+  "blame": [
+    "absolve"
+  ],
+  "blanket": [],
+  "blind": [
+    "sighted"
+  ],
+  "block": [
+    "unblock"
+  ],
+  "blood": [],
+  "blow": [],
+  "blue": [],
+  "board": [],
+  "boat": [],
+  "body": [],
+  "bomb": [],
+  "bombing": [],
+  "bond": [],
+  "bone": [],
+  "book": [],
+  "boom": [],
+  "boot": [],
+  "border": [],
+  "born": [
+    "unborn"
+  ],
+  "borrow": [
+    "lend"
+  ],
+  "boss": [],
+  "both": [],
+  "bother": [],
+  "bottle": [],
+  "bottom": [
+    "top",
+    "side"
+  ],
+  "boundary": [],
+  "bowl": [],
+  "box": [
+    "unbox"
+  ],
+  "boy": [
+    "girl"
+  ],
+  "boyfriend": [],
+  "brain": [],
+  "branch": [],
+  "brand": [],
+  "bread": [],
+  "break": [
+    "repair",
+    "keep",
+    "make"
+  ],
+  "breakfast": [],
+  "breast": [],
+  "breath": [],
+  "breathe": [],
+  "brick": [],
+  "bridge": [],
+  "brief": [],
+  "briefly": [],
+  "bright": [
+    "dull"
+  ],
+  "brilliant": [],
+  "bring": [
+    "take away"
+  ],
+  "British": [],
+  "broad": [],
+  "broken": [
+    "unbroken"
+  ],
+  "brother": [
+    "sister"
+  ],
+  "brown": [],
+  "brush": [],
+  "buck": [],
+  "budget": [],
+  "build": [],
+  "building": [],
+  "bullet": [],
+  "bunch": [],
+  "burden": [
+    "unburden"
+  ],
+  "burn": [],
+  "bury": [],
+  "bus": [],
+  "business": [],
+  "busy": [
+    "idle"
+  ],
+  "but": [],
+  "butter": [],
+  "button": [
+    "unbutton"
+  ],
+  "buy": [
+    "sell"
+  ],
+  "buyer": [],
+  "by": [],
+  "cabin": [],
+  "cabinet": [],
+  "cable": [],
+  "cake": [],
+  "calculate": [],
+  "call": [],
+  "camera": [],
+  "camp": [],
+  "campaign": [],
+  "campus": [],
+  "can": [],
+  "Canadian": [],
+  "cancer": [],
+  "candidate": [],
+  "cap": [],
+  "capability": [
+    "incapability"
+  ],
+  "capable": [
+    "incapable"
+  ],
+  "capacity": [
+    "incapacity"
+  ],
+  "capital": [],
+  "captain": [],
+  "capture": [],
+  "car": [],
+  "carbon": [],
+  "card": [],
+  "care": [],
+  "career": [],
+  "careful": [
+    "careless"
+  ],
+  "carefully": [
+    "carelessly"
+  ],
+  "carrier": [],
+  "carry": [],
+  "case": [],
+  "cash": [
+    "credit"
+  ],
+  "cast": [],
+  "cat": [],
+  "catch": [],
+  "category": [],
+  "Catholic": [],
+  "cause": [],
+  "ceiling": [],
+  "celebrate": [],
+  "celebration": [],
+  "celebrity": [],
+  "cell": [],
+  "center": [
+    "right",
+    "left"
+  ],
+  "central": [
+    "peripheral"
+  ],
+  "century": [],
+  "CEO": [],
+  "ceremony": [],
+  "certain": [
+    "uncertain"
+  ],
+  "certainly": [],
+  "chain": [
+    "unchain"
+  ],
+  "chair": [],
+  "chairman": [],
+  "challenge": [],
+  "chamber": [],
+  "champion": [],
+  "championship": [],
+  "chance": [],
+  "change": [
+    "stay"
+  ],
+  "changing": [],
+  "channel": [],
+  "chapter": [],
+  "character": [],
+  "characteristic": [
+    "uncharacteristic"
+  ],
+  "characterize": [],
+  "charge": [
+    "discharge",
+    "pay cash"
+  ],
+  "charity": [],
+  "chart": [],
+  "chase": [],
+  "cheap": [
+    "expensive"
+  ],
+  "check": [],
+  "cheek": [],
+  "cheese": [],
+  "chef": [],
+  "chemical": [],
+  "chest": [],
+  "chicken": [],
+  "chief": [],
+  "child": [
+    "parent"
+  ],
+  "childhood": [],
+  "Chinese": [],
+  "chip": [],
+  "chocolate": [],
+  "choice": [],
+  "cholesterol": [],
+  "choose": [],
+  "Christian": [
+    "unchristian"
+  ],
+  "Christmas": [],
+  "church": [],
+  "cigarette": [],
+  "circle": [],
+  "circumstance": [],
+  "cite": [],
+  "citizen": [
+    "noncitizen"
+  ],
+  "city": [],
+  "civil": [
+    "uncivil",
+    "sidereal"
+  ],
+  "civilian": [
+    "serviceman",
+    "military"
+  ],
+  "claim": [
+    "disclaim",
+    "forfeit"
+  ],
+  "class": [],
+  "classic": [],
+  "classroom": [],
+  "clean": [
+    "dirty",
+    "unclean"
+  ],
+  "clear": [
+    "opaque",
+    "cloudy",
+    "unclear",
+    "bounce"
+  ],
+  "clearly": [],
+  "client": [],
+  "climate": [],
+  "climb": [],
+  "clinic": [],
+  "clinical": [],
+  "clock": [],
+  "close": [
+    "open",
+    "distant"
+  ],
+  "closely": [],
+  "closer": [],
+  "clothes": [],
+  "clothing": [],
+  "cloud": [],
+  "club": [],
+  "clue": [],
+  "cluster": [],
+  "coach": [],
+  "coal": [],
+  "coalition": [],
+  "coast": [],
+  "coat": [],
+  "code": [],
+  "coffee": [],
+  "cognitive": [],
+  "cold": [
+    "hot"
+  ],
+  "collapse": [],
+  "colleague": [],
+  "collect": [],
+  "collection": [],
+  "collective": [
+    "distributive"
+  ],
+  "college": [],
+  "colonial": [],
+  "color": [
+    "black-and-white",
+    "colorlessness",
+    "discolor"
+  ],
+  "column": [],
+  "combination": [],
+  "combine": [],
+  "come": [
+    "go"
+  ],
+  "comedy": [
+    "tragedy"
+  ],
+  "comfort": [
+    "discomfort"
+  ],
+  "comfortable": [
+    "uncomfortable"
+  ],
+  "command": [],
+  "commander": [],
+  "comment": [],
+  "commercial": [
+    "noncommercial"
+  ],
+  "commission": [],
+  "commit": [],
+  "commitment": [],
+  "committee": [],
+  "common": [
+    "individual",
+    "uncommon"
+  ],
+  "communicate": [
+    "excommunicate"
+  ],
+  "communication": [],
+  "community": [],
+  "company": [],
+  "compare": [],
+  "comparison": [],
+  "compete": [],
+  "competition": [
+    "cooperation"
+  ],
+  "competitive": [
+    "noncompetitive"
+  ],
+  "competitor": [],
+  "complain": [
+    "cheer"
+  ],
+  "complaint": [],
+  "complete": [
+    "incomplete"
+  ],
+  "completely": [],
+  "complex": [
+    "simple"
+  ],
+  "complicated": [],
+  "component": [],
+  "compose": [],
+  "composition": [],
+  "comprehensive": [
+    "noncomprehensive"
+  ],
+  "computer": [],
+  "concentrate": [
+    "deconcentrate"
+  ],
+  "concentration": [
+    "distribution",
+    "dilution"
+  ],
+  "concept": [],
+  "concern": [
+    "unconcern"
+  ],
+  "concerned": [
+    "unconcerned"
+  ],
+  "concert": [],
+  "conclude": [],
+  "conclusion": [],
+  "concrete": [
+    "abstract"
+  ],
+  "condition": [],
+  "conduct": [],
+  "conference": [],
+  "confidence": [
+    "diffidence"
+  ],
+  "confident": [
+    "diffident"
+  ],
+  "confirm": [],
+  "conflict": [],
+  "confront": [
+    "avoid"
+  ],
+  "confusion": [],
+  "Congress": [],
+  "congressional": [],
+  "connect": [
+    "disconnect"
+  ],
+  "connection": [],
+  "consciousness": [
+    "unconsciousness"
+  ],
+  "consensus": [],
+  "consequence": [
+    "inconsequence"
+  ],
+  "conservative": [
+    "liberal"
+  ],
+  "consider": [],
+  "considerable": [
+    "inconsiderable"
+  ],
+  "consideration": [
+    "inconsideration"
+  ],
+  "consist": [],
+  "consistent": [
+    "inconsistent"
+  ],
+  "constant": [
+    "inconstant"
+  ],
+  "constantly": [],
+  "constitute": [],
+  "constitutional": [
+    "unconstitutional"
+  ],
+  "construct": [],
+  "construction": [
+    "misconstruction"
+  ],
+  "consultant": [],
+  "consume": [
+    "abstain"
+  ],
+  "consumer": [],
+  "consumption": [],
+  "contact": [],
+  "contain": [],
+  "container": [],
+  "contemporary": [],
+  "content": [
+    "discontent"
+  ],
+  "contest": [],
+  "context": [],
+  "continue": [
+    "discontinue"
+  ],
+  "continued": [
+    "discontinued"
+  ],
+  "contract": [
+    "expand"
+  ],
+  "contrast": [],
+  "contribute": [],
+  "contribution": [],
+  "control": [],
+  "controversial": [
+    "uncontroversial"
+  ],
+  "controversy": [],
+  "convention": [],
+  "conventional": [
+    "unconventional",
+    "nuclear"
+  ],
+  "conversation": [],
+  "convert": [],
+  "conviction": [
+    "acquittal"
+  ],
+  "convince": [],
+  "cook": [],
+  "cookie": [],
+  "cooking": [],
+  "cool": [
+    "heat",
+    "warm"
+  ],
+  "cooperation": [
+    "competition"
+  ],
+  "cop": [],
+  "cope": [],
+  "copy": [],
+  "core": [],
+  "corn": [],
+  "corner": [],
+  "corporate": [],
+  "corporation": [],
+  "correct": [
+    "falsify",
+    "incorrect"
+  ],
+  "correspondent": [],
+  "cost": [],
+  "cotton": [],
+  "couch": [],
+  "could": [],
+  "council": [],
+  "counselor": [],
+  "count": [],
+  "counter": [],
+  "country": [],
+  "county": [],
+  "couple": [
+    "uncouple"
+  ],
+  "courage": [
+    "cowardice"
+  ],
+  "course": [],
+  "court": [],
+  "cousin": [],
+  "cover": [
+    "uncover"
+  ],
+  "coverage": [],
+  "cow": [],
+  "crack": [],
+  "craft": [],
+  "crash": [],
+  "crazy": [],
+  "cream": [],
+  "create": [],
+  "creation": [],
+  "creative": [
+    "uncreative"
+  ],
+  "creature": [],
+  "credit": [
+    "debit",
+    "cash"
+  ],
+  "crew": [],
+  "crime": [],
+  "criminal": [],
+  "crisis": [],
+  "criteria": [],
+  "critic": [],
+  "critical": [
+    "noncritical",
+    "uncritical"
+  ],
+  "criticism": [],
+  "criticize": [
+    "praise"
+  ],
+  "crop": [],
+  "cross": [
+    "uncross"
+  ],
+  "crowd": [],
+  "crucial": [
+    "noncrucial"
+  ],
+  "cry": [
+    "laugh"
+  ],
+  "cultural": [],
+  "culture": [],
+  "cup": [],
+  "curious": [
+    "incurious"
+  ],
+  "current": [
+    "noncurrent"
+  ],
+  "currently": [],
+  "curriculum": [],
+  "custom": [],
+  "customer": [],
+  "cut": [
+    "uncut"
+  ],
+  "cycle": [],
+  "dad": [],
+  "daily": [],
+  "damage": [],
+  "dance": [],
+  "danger": [
+    "safety"
+  ],
+  "dangerous": [
+    "safe"
+  ],
+  "dare": [],
+  "dark": [
+    "light"
+  ],
+  "darkness": [
+    "lightness"
+  ],
+  "data": [],
+  "date": [],
+  "daughter": [
+    "son"
+  ],
+  "day": [
+    "night"
+  ],
+  "dead": [
+    "alive",
+    "live",
+    "living"
+  ],
+  "deal": [],
+  "dealer": [],
+  "dear": [],
+  "death": [
+    "birth"
+  ],
+  "debate": [],
+  "debt": [],
+  "decade": [],
+  "decide": [],
+  "decision": [
+    "indecision"
+  ],
+  "deck": [],
+  "declare": [],
+  "decline": [
+    "improvement"
+  ],
+  "decrease": [
+    "increase"
+  ],
+  "deep": [
+    "shallow"
+  ],
+  "deeply": [],
+  "deer": [],
+  "defeat": [
+    "victory"
+  ],
+  "defend": [
+    "prosecute",
+    "attack"
+  ],
+  "defendant": [
+    "plaintiff"
+  ],
+  "defense": [
+    "offense",
+    "prosecution"
+  ],
+  "defensive": [
+    "offensive"
+  ],
+  "deficit": [
+    "lead"
+  ],
+  "define": [],
+  "definitely": [],
+  "definition": [],
+  "degree": [],
+  "delay": [
+    "rush"
+  ],
+  "deliver": [],
+  "delivery": [],
+  "demand": [
+    "supply"
+  ],
+  "democracy": [],
+  "Democrat": [],
+  "democratic": [
+    "undemocratic"
+  ],
+  "demonstrate": [],
+  "demonstration": [],
+  "deny": [
+    "allow",
+    "admit"
+  ],
+  "department": [],
+  "depend": [],
+  "dependent": [
+    "independent"
+  ],
+  "depending": [],
+  "depict": [],
+  "depression": [
+    "elation"
+  ],
+  "depth": [],
+  "deputy": [],
+  "derive": [],
+  "describe": [],
+  "description": [],
+  "desert": [],
+  "deserve": [],
+  "design": [],
+  "designer": [],
+  "desire": [],
+  "desk": [],
+  "desperate": [],
+  "despite": [],
+  "destroy": [],
+  "destruction": [],
+  "detail": [],
+  "detailed": [],
+  "detect": [],
+  "determine": [],
+  "develop": [],
+  "developing": [],
+  "development": [
+    "nondevelopment"
+  ],
+  "device": [],
+  "devote": [],
+  "dialogue": [],
+  "die": [
+    "be born"
+  ],
+  "diet": [],
+  "differ": [
+    "equal"
+  ],
+  "difference": [
+    "sameness"
+  ],
+  "different": [
+    "same"
+  ],
+  "differently": [],
+  "difficult": [
+    "easy"
+  ],
+  "difficulty": [
+    "ease"
+  ],
+  "dig": [],
+  "digital": [
+    "analogue"
+  ],
+  "dimension": [],
+  "dining": [],
+  "dinner": [],
+  "direct": [
+    "indirect",
+    "retrograde",
+    "alternating",
+    "inverse"
+  ],
+  "direction": [],
+  "directly": [
+    "indirectly"
+  ],
+  "director": [],
+  "dirt": [],
+  "dirty": [
+    "clean"
+  ],
+  "disability": [],
+  "disagree": [
+    "agree"
+  ],
+  "disappear": [
+    "appear"
+  ],
+  "disaster": [],
+  "discipline": [
+    "indiscipline"
+  ],
+  "discourse": [],
+  "discover": [],
+  "discovery": [],
+  "discrimination": [],
+  "discuss": [],
+  "discussion": [],
+  "disease": [],
+  "dish": [],
+  "dismiss": [],
+  "disorder": [
+    "order"
+  ],
+  "display": [],
+  "dispute": [],
+  "distance": [],
+  "distant": [
+    "close"
+  ],
+  "distinct": [
+    "indistinct"
+  ],
+  "distinction": [],
+  "distinguish": [],
+  "distribute": [],
+  "distribution": [
+    "concentration"
+  ],
+  "district": [],
+  "diverse": [],
+  "diversity": [],
+  "divide": [
+    "multiply",
+    "unite"
+  ],
+  "division": [],
+  "divorce": [],
+  "DNA": [],
+  "do": [],
+  "doctor": [],
+  "document": [],
+  "dog": [],
+  "domestic": [
+    "foreign",
+    "undomestic"
+  ],
+  "dominant": [
+    "subordinate",
+    "recessive"
+  ],
+  "dominate": [],
+  "door": [],
+  "double": [
+    "single"
+  ],
+  "doubt": [],
+  "down": [
+    "up"
+  ],
+  "downtown": [
+    "uptown"
+  ],
+  "dozen": [],
+  "draft": [],
+  "drag": [],
+  "drama": [],
+  "dramatic": [
+    "undramatic",
+    "lyric"
+  ],
+  "dramatically": [
+    "undramatically"
+  ],
+  "draw": [],
+  "drawing": [],
+  "dream": [],
+  "dress": [
+    "undress"
+  ],
+  "drink": [],
+  "drive": [],
+  "driver": [
+    "nondriver"
+  ],
+  "drop": [],
+  "drug": [],
+  "dry": [
+    "wet",
+    "sweet",
+    "phlegmy"
+  ],
+  "due": [
+    "undue"
+  ],
+  "during": [],
+  "dust": [],
+  "duty": [],
+  "each": [],
+  "eager": [
+    "uneager"
+  ],
+  "ear": [],
+  "early": [
+    "late",
+    "middle"
+  ],
+  "earn": [],
+  "earnings": [],
+  "earth": [],
+  "ease": [
+    "difficulty"
+  ],
+  "easily": [],
+  "east": [
+    "west"
+  ],
+  "eastern": [
+    "western"
+  ],
+  "easy": [
+    "uneasy",
+    "difficult"
+  ],
+  "eat": [],
+  "economic": [],
+  "economics": [],
+  "economist": [],
+  "economy": [],
+  "edge": [],
+  "edition": [],
+  "editor": [],
+  "educate": [],
+  "education": [],
+  "educational": [],
+  "educator": [],
+  "effect": [],
+  "effective": [
+    "ineffective"
+  ],
+  "effectively": [
+    "ineffectively"
+  ],
+  "efficiency": [
+    "inefficiency"
+  ],
+  "efficient": [
+    "inefficient"
+  ],
+  "effort": [],
+  "egg": [],
+  "eight": [],
+  "either": [],
+  "elderly": [],
+  "elect": [],
+  "election": [],
+  "electric": [],
+  "electricity": [],
+  "electronic": [],
+  "element": [],
+  "elementary": [],
+  "eliminate": [],
+  "elite": [],
+  "else": [],
+  "elsewhere": [],
+  "e-mail": [
+    "snail mail"
+  ],
+  "embrace": [],
+  "emerge": [],
+  "emergency": [],
+  "emission": [],
+  "emotion": [],
+  "emotional": [
+    "unemotional",
+    "cerebral"
+  ],
+  "emphasis": [],
+  "emphasize": [],
+  "employ": [],
+  "employee": [
+    "employer"
+  ],
+  "employer": [
+    "employee"
+  ],
+  "employment": [
+    "unemployment"
+  ],
+  "empty": [
+    "fill",
+    "full"
+  ],
+  "enable": [
+    "disable"
+  ],
+  "encounter": [],
+  "encourage": [
+    "discourage"
+  ],
+  "end": [
+    "begin",
+    "beginning",
+    "middle"
+  ],
+  "enemy": [],
+  "energy": [],
+  "enforcement": [],
+  "engage": [
+    "disengage"
+  ]
+}

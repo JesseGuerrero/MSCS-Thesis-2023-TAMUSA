@@ -17,13 +17,31 @@ from transformers import RobertaForSequenceClassification, RobertaTokenizer
 
 import utils as U
 from mutation_miniframework.Dataset import *
-from mutation_miniframework.operators import deleteRandomArticle, replaceLetters, misspellWords
+from mutation_miniframework.operators import deleteRandomArticle, replaceLetters, replaceFromDictionary, \
+	replaceWordListWithRandomSelf
 
 misspellings = {}
 with open("../mutation_miniframework/mutation_data/misspellings.json") as misspellingsJSON:
 	misspellingsBuffer = dict(json.load(misspellingsJSON))
 	for word, misspellList in misspellingsBuffer.items():
 		misspellings[word] = misspellList[0]
+
+antonyms = {}
+with open("../mutation_miniframework/mutation_data/antonyms.json") as antonymsJSON:
+	antonymsBuffer = dict(json.load(antonymsJSON))
+	for word, antonymsList in antonymsBuffer.items():
+		antonyms[word] = antonymsList[0]
+
+synonyms = {}
+with open("../mutation_miniframework/mutation_data/misspellings.json") as synonymsJSON:
+	synonymsBuffer = dict(json.load(synonymsJSON))
+	for word, synonymsList in synonymsBuffer.items():
+		synonyms[word] = synonymsList[0]
+
+randomList = []
+with open("../mutation_miniframework/mutation_data/random_word.json") as randomJSON:
+	randomBuffer = dict(json.load(randomJSON))
+	randomList = randomBuffer["word"]
 
 project_data_path = "./test"
 
@@ -68,7 +86,7 @@ test_data = U.load_data(real_text_dir, text_file_mutation,
 
 # set hyperparameters
 batch_size = 1
-epochs = 50
+epochs = 2
 learning_rate = 0.0001
 finetune_embeddings = False
 device = "cuda" if torch.cuda.is_available() else "cpu"
@@ -122,16 +140,16 @@ for e in t:
 			# batch size might have to be 1 due to varying caption length
 			cur_data = data[i*batch_size:(i+1)*batch_size]
 			cur_names = cur_data[:,0]
-			cur_captions = cur_data[:,1]
+			# cur_captions = cur_data[:,1]
 			cur_labels = cur_data[:,2].astype(np.int8)#Mutation is 0, real is 1
 
 			# Generate mutation
 			# if need to generate mutation, add code here
 			# print("DATA " + str(cur_data))
 			dataDict = {}
-			if(cur_labels == 0):
-				dataDict[0] = [str(cur_captions)]
-				choice = randrange(0, 3)
+			if(phase == "train" and cur_labels == 0):
+				dataDict[0] = [str(cur_data[:,1])]
+				choice = randrange(0, 6)
 				mutatedCaptionData = Dataset(dataDict, [""])
 				if choice == 0:
 					deleteRandomArticle(mutatedCaptionData, [" a ", " an ", " the ", " is "], "", word_change_limit=3)
@@ -141,20 +159,22 @@ for e in t:
 						"e": "ε"
 					}, "", word_change_limit=3)
 				if choice == 2:
-					misspellWords(mutatedCaptionData, misspellings, "", word_change_limit=3)
-				if choice == 3:
-					pass
-				if choice == 4:
-					pass
-				if choice == 5:
-					pass
+					replaceFromDictionary(mutatedCaptionData, misspellings, "", word_change_limit=3)
+				if choice == 3:#random word replacement
+					replaceWordListWithRandomSelf(mutatedCaptionData, randomList, "", word_change_limit=2)
+				if choice == 4:#synonyms replacement
+					replaceFromDictionary(mutatedCaptionData, synonyms, "", word_change_limit=2)
+				if choice == 5:#antonyms replacement
+					replaceFromDictionary(mutatedCaptionData, antonyms, "", word_change_limit=2)
 				if choice == 6:
 					pass
 				# print("MUTATION " + mutatedCaptionData[0][0])
 				cur_data[:,1] = mutatedCaptionData[0][0]
+				cur_captions = cur_data[:,1]
+				# print(cur_data[:,1])
 
 			# Tokenize captions
-			cur_token_ids = [tokenizer.encode(item) for item in cur_data[:,1]]
+			cur_token_ids = [tokenizer.encode(item) for item in cur_captions]
 			cur_masks = [np.ones(len(item)) for item in cur_token_ids]
 
 			# Convert to tensor and send data to device

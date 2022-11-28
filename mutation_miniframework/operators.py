@@ -6,7 +6,7 @@ Saves new file output with added functional name additions
 '''
 
 
-def misspellWords(dataset : Dataset, word_list : dict, mutation="misspell", word_change_limit=1):
+def replaceFromDictionary(dataset : Dataset, word_list : dict, mutation="misspell", word_change_limit=1):
     replaceWords(dataset, word_list, word_change_limit)
     dataset.saveDataMutation(mutation)
 '''
@@ -20,7 +20,7 @@ def replaceLetters(dataset : Dataset, articles : dict, mutation="letterReplace",
     replaceWords(dataset, articles, word_change_limit)
     dataset.saveDataMutation(mutation)
 
-def replaceSynonymAPI(dataset : Dataset, words_to_replace : list, mutation="synonymSub", word_change_limit=1):
+def replaceSynonyms(dataset : Dataset, words_to_replace : list, mutation="synonymSub", word_change_limit=1):
     word_list = {}
     for word in words_to_replace:
         word_list[word] = getSynonymAPI(word)
@@ -67,4 +67,8 @@ def deleteRandomArticle(dataset : Dataset, articles : list, mutation="delArticle
     for article in articles:
         word_list[article] = " "
     replaceWords(dataset, word_list, word_change_limit)
+    dataset.saveDataMutation(mutation)
+
+def replaceWordListWithRandomSelf(dataset : Dataset, random_words : list, mutation="randWord", word_change_limit=1):
+    replaceWordsByDoubleList(dataset, random_words, word_change_limit)
     dataset.saveDataMutation(mutation)
