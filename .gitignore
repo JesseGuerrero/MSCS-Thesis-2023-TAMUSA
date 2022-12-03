@@ -1,1 +1,8 @@
 /binary_classifier/detector-large.pt
+/parseCOCODatasets/captions/humanCOCO.txt
+/parseCOCODatasets/captions/HumanCOCOFullTest.json
+/parseCOCODatasets/captions/HumanCOCOFullTrain.json
+/parseCOCODatasets/captions/CompleteTestSet1.json
+/parseCOCODatasets/captions/CompleteTestSet2.json
+/parseCOCODatasets/captions/CompleteTrainingSet.json
+/parseCOCODatasets/captions/CompleteValidationSet.json
