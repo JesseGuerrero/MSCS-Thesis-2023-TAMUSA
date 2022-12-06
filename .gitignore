@@ -6,3 +6,5 @@
 /parseCOCODatasets/captions/CompleteTestSet2.json
 /parseCOCODatasets/captions/CompleteTrainingSet.json
 /parseCOCODatasets/captions/CompleteValidationSet.json
+/classifier_testing/detector-large.pt
+/classifier_testing/bestCOCOFullSet.pt

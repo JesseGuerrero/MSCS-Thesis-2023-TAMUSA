@@ -49,9 +49,11 @@ def load_text(cur_text_path):
 		with open(cur_text_path) as jsonFile:
 			data = dict(json.load(jsonFile))
 			for img, captionList in data.items():
+				img_names.append(img)
+				captionBuff = []
 				for caption in captionList:
-					img_names.append(img)
-					captions.append(caption)
+					captionBuff.append(caption)
+				captions.append(" ".join(captionBuff))
 	if ".txt" in cur_text_path:
 		with open(cur_text_path) as txtFile:
 			for line in txtFile.readlines():
