@@ -26,11 +26,11 @@ Adversarial Types:
 EXPERIMENT_NAME = "CheckMutation"
 CHECK_HUMAN = False
 CHECK_BY_IMAGE = True
-ADVERSARIAL_TYPE = "do-nothing"
+ADVERSARIAL_TYPE = "misspelling"
 # DATA_FILE = './data/Test_HumanFullSet.json'
 # DATA_FILE = './data/Test_MutationFullSetRandomizedMutations.json'
 # DATA_FILE = './data/Test_MutationFullSetReplaceAE.json'
-DATA_FILE = './data/Test_MutationFullSetMisspellings.json'
+# DATA_FILE = './data/Test_MutationFullSetMisspellings.json'
 # DATA_FILE = './data/Test_MutationFullSetDeleteArticles.json'
 # DATA_FILE = './data/Test_MutationFullReplaceSynonyms.json'
 # DATA_FILE = './data/Test_MutationFullReplaceRandomWords.json'
@@ -38,11 +38,11 @@ DATA_FILE = './data/Test_MutationFullSetMisspellings.json'
 # DATA_FILE = './data/humanCOCO.txt'
 #DATA_FILE = './data/fakeTextSmall1.txt'
 #DATA_FILE = './data/fakeTextSmall2.txt'
-# DATA_FILE = './data/xl-1542M-k40.test.jsonl'
-DETECTOR_FILE = "./bestCOCOFullSet.pt"
+DATA_FILE = './data/xl-1542M-k40.test.jsonl'
+DETECTOR_FILE = "./bestCOCOFullSetCombined.pt"
 # DETECTOR_FILE = "./detector-large.pt"
 HOMOGLYPH_REPLACEMENT = [[' a ', ' α ']]
-IMAGES_TO_RUN = 100
+IMAGES_TO_RUN = 500
 
 IMAGES_TO_RUN *= (1 if CHECK_BY_IMAGE else 5) # run 5 captions individually when not by image
 

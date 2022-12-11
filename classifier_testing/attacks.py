@@ -81,9 +81,9 @@ def attack(
 
 	if attack_type == 'misspelling':
 		adv_text = ''
-		misspelling_dict = load_misspelling_dict(misspelling_dict)
+		misspelling_dict = load_misspelling_dict("./misspellings.json")
 		adv_text = ''
-		og_max_changes = int(max_percent_change*len(text.split(' ')))
+		og_max_changes = int(0.5*len(text.split(' ')))
 		special_chars = [' ', '.', '"']
 		words = text.split(' ')
 		valid_word_indices = []

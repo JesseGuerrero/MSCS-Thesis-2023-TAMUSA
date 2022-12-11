@@ -86,7 +86,7 @@ test_data = U.load_data(real_text_dir, text_file_real,
 						train_test_split='test')
 
 # set hyperparameters
-batch_size = 512
+batch_size = 1
 epochs = 10
 learning_rate = 0.0001
 finetune_embeddings = False
@@ -151,71 +151,70 @@ for e in t:
 			cur_names = cur_data[:,0]
 			cur_captions = cur_data[:,1]#TODO: Adjust for extra dimension, captions and labels
 			cur_labels = cur_data[:,2].astype(np.int8)#Mutation is 0, real is 1
-			for i in range(0, batch_size): #Here is where the issue lies, using batch sizing...
-				dataDict = {}
-				if phase == "train" and cur_labels[i] == 0:
-					dataDict[0] = [str(cur_data[:,1][i])]
-					choice = randrange(0, 6)
-					mutatedCaptionData = Dataset(dataDict, [""])
-					if choice == 0:
-						deleteRandomArticle(mutatedCaptionData, [" a ", " an ", " the ", " is "], "", word_change_limit=5)
-					if choice == 1:
-						replaceLetters(mutatedCaptionData, {
-							"a": "α",
-							"e": "ε"
-						}, "", word_change_limit=6)
-					if choice == 2:
-						replaceFromDictionary(mutatedCaptionData, misspellings, "", word_change_limit=5)
-					if choice == 3:#random word replacement
-						replaceWordListWithRandomSelf(mutatedCaptionData, randomList, "", word_change_limit=4)
-					if choice == 4:#synonyms replacement
-						replaceFromDictionary(mutatedCaptionData, synonyms, "", word_change_limit=4)
-					if choice == 5:#antonyms replacement
-						replaceFromDictionary(mutatedCaptionData, antonyms, "", word_change_limit=4)
-					if choice == 6:
-						pass
-					# print("MUTATION " + mutatedCaptionData[0][0])
-					cur_data[:,1][i] = np.array(mutatedCaptionData[0][0])
-			cur_captions = cur_data[:,1]
-					# print(cur_data[:,1])
-			for i in range(0, batch_size):
-				print(i)
-				print(str(cur_captions[i]))
-				print(type(cur_captions[i]))
-				# print(str(cur_labels[i]))
-			# Tokenize captions
-				cur_token_ids = [tokenizer.encode(item) for item in cur_captions[i]]
-				cur_masks = [np.ones(len(item)) for item in cur_token_ids]
 
-				# Convert to tensor and send data to device
-				cur_token_ids = torch.tensor(np.array(cur_token_ids)).to(device)
-				cur_labels[i] = torch.tensor(np.array(cur_labels[i])).long().to(device)
-				cur_masks = torch.tensor(np.array(cur_masks)).to(device)
+			# Generate mutation
+			# if need to generate mutation, add code here
+			# print("DATA " + str(cur_data))
+			dataDict = {}
+			if(phase == "train" and cur_labels == 0):
+				dataDict[0] = [str(cur_data[:,1])]
+				choice = randrange(0, 6)
+				mutatedCaptionData = Dataset(dataDict, [""])
+				if choice == 0:
+					deleteRandomArticle(mutatedCaptionData, [" a ", " an ", " the ", " is "], "", word_change_limit=3)
+				if choice == 1:
+					replaceLetters(mutatedCaptionData, {
+						"a": "α",
+						"e": "ε"
+					}, "", word_change_limit=3)
+				if choice == 2:
+					replaceFromDictionary(mutatedCaptionData, misspellings, "", word_change_limit=3)
+				if choice == 3:#random word replacement
+					replaceWordListWithRandomSelf(mutatedCaptionData, randomList, "", word_change_limit=2)
+				if choice == 4:#synonyms replacement
+					replaceFromDictionary(mutatedCaptionData, synonyms, "", word_change_limit=2)
+				if choice == 5:#antonyms replacement
+					replaceFromDictionary(mutatedCaptionData, antonyms, "", word_change_limit=2)
+				if choice == 6:
+					pass
+				# print("MUTATION " + mutatedCaptionData[0][0])
+				cur_data[:,1] = mutatedCaptionData[0][0]
+				cur_captions = cur_data[:,1]
+				# print(cur_data[:,1])
+
+			# Tokenize captions
+			cur_token_ids = [tokenizer.encode(item) for item in cur_captions]
+			cur_masks = [np.ones(len(item)) for item in cur_token_ids]
+
+			# Convert to tensor and send data to device
+			cur_token_ids = torch.tensor(np.array(cur_token_ids)).to(device)
+			cur_labels = torch.tensor(np.array(cur_labels)).long().to(device)
+			cur_masks = torch.tensor(np.array(cur_masks)).to(device)
 
 			# For training
-				if(phase == "train"):
-					optimizer.zero_grad()
+			if(phase == "train"):
+				optimizer.zero_grad()
+				logits = model(cur_token_ids, attention_mask=cur_masks)
+				loss = loss_function(logits[0], cur_labels)
+				loss.backward()
+				optimizer.step()
+				# scheduler may be needed in the future
+
+			# For validation
+			else:
+				with torch.no_grad():
 					logits = model(cur_token_ids, attention_mask=cur_masks)
-					loss = loss_function(logits[0], cur_labels[i])
-					loss.backward()
-					optimizer.step()
-					# scheduler may be needed in the future
+					loss = loss_function(logits[0], cur_labels)
 
-				# For validation
-				else:
-					with torch.no_grad():
-						logits = model(cur_token_ids, attention_mask=cur_masks)
-						loss = loss_function(logits[0], cur_labels[i])
-
-				# Track current performance
-				# Count correct prediciton
-				for kk in range(len(cur_labels[i])):
-					prob = logits[0][kk].softmax(dim=-1)
-					pred = torch.argmax(prob.detach().cpu())
-					if(pred==cur_labels[i][kk]):
-						epoch_correct_pred +=  1.0
-				# Add current loss to total epoch loss
-				epoch_loss += loss.item()
+			# Track current performance
+			# Count correct prediciton
+			for kk in range(len(cur_labels)):
+				prob = logits[0][kk].softmax(dim=-1)
+				pred = torch.argmax(prob.detach().cpu())
+				if(pred==cur_labels[kk]):
+					epoch_correct_pred +=  1.0
+			# Add current loss to total epoch loss
+			epoch_loss += loss.item()
 
 			# Update progress bar
 			t.set_description("Epoch/Step: %i/%i[Phase:%s]  Loss:%.4f  CorrectPred:%.4f [%i/%i]"
