@@ -161,7 +161,7 @@ for e in t:
 				choice = randrange(0, 6)
 				mutatedCaptionData = Dataset(dataDict, [""])
 				if choice == 0:
-					deleteRandomArticle(mutatedCaptionData, [" a ", " an ", " the ", " is "], "", word_change_limit=3)
+					deleteRandomArticle(mutatedCaptionData, [" a ", " an ", " the "], "", word_change_limit=99)
 				if choice == 1:
 					replaceLetters(mutatedCaptionData, {
 						"a": "α",
@@ -180,7 +180,7 @@ for e in t:
 				# print("MUTATION " + mutatedCaptionData[0][0])
 				cur_data[:,1] = mutatedCaptionData[0][0]
 				cur_captions = cur_data[:,1]
-				# print(cur_data[:,1])
+				# print(str(choice) + ":" + str(cur_data[:,1][0]))
 
 			# Tokenize captions
 			cur_token_ids = [tokenizer.encode(item) for item in cur_captions]

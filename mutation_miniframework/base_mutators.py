@@ -22,6 +22,7 @@ def replaceWords(dataset : Dataset, word_list : dict, count=1):
         textsBuffer = []
         for text in texts:
             text : str
+            text = text.replace("[", "").replace("]", "").replace("'", "").replace('"', "")
             amountToReplace = count
             for word, replacement in word_list.items():
                 (text, numReplaced) = re.subn(word, replacement, text, amountToReplace)
@@ -37,6 +38,7 @@ def replaceWordsByDoubleList(dataset : Dataset, word_list : list, count=1):
         textsBuffer = []
         for text in texts:
             text : str
+            text = text.replace("[", "").replace("]", "").replace("'", "").replace('"', "")
             amountToReplace = count
             words = text.split(" ")
             for word in words:

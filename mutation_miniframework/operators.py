@@ -62,11 +62,25 @@ Replaces a verb with another
 def replaceInTextsRandomVerb(dataset : Dataset, word_change_limit=1):
     pass
 
+def removeStartingArticles(dataset : Dataset):
+    for key, texts in dataset.items():
+        textsBuffer = []
+        for text in texts:
+            text : str
+            text = text.replace("[", "").replace("]", "").replace("'", "").replace('"', "")
+            wordsList = text.split(" ")
+            if wordsList[0].lower() == "a" or wordsList[0].lower() == "the" or wordsList[0].lower() == "an":
+                wordsList = wordsList[1:]
+            text = ' '.join(wordsList)
+            textsBuffer.append(text)
+        dataset[key] = textsBuffer
+
 def deleteRandomArticle(dataset : Dataset, articles : list, mutation="delArticles", word_change_limit=1):
     word_list = {}
     for article in articles:
         word_list[article] = " "
     replaceWords(dataset, word_list, word_change_limit)
+    removeStartingArticles(dataset)
     dataset.saveDataMutation(mutation)
 
 def replaceWordListWithRandomSelf(dataset : Dataset, random_words : list, mutation="randWord", word_change_limit=1):
