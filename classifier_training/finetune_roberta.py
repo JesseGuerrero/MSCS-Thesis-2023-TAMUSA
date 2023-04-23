@@ -33,8 +33,7 @@ import sys
 sys.path.append('..')
 
 from mutation_miniframework.Dataset import *
-from mutation_miniframework.operators import deleteRandomArticle, replaceLetters, replaceFromDictionary, \
-	replaceWordListWithRandomSelf
+from mutation_miniframework.operators import deleteRandomArticle, replaceLetters, replaceFromDictionary, replaceWordListWithRandomSelf
 
 misspellings = U.loadJSONWordDictionary("../mutation_miniframework/mutation_data/misspellings.json")
 antonyms = U.loadJSONWordDictionary("../mutation_miniframework/mutation_data/antonyms.json")
@@ -168,13 +167,13 @@ for e in t:
 						"e": "ε"
 					}, "", word_change_limit=3)
 				if choice == 2:
-					replaceFromDictionary(mutatedCaptionData, misspellings, "", word_change_limit=3)
+					replaceFromDictionary(mutatedCaptionData, misspellings, "", word_change_limit=6)
 				if choice == 3:#random word replacement
-					replaceWordListWithRandomSelf(mutatedCaptionData, randomList, "", word_change_limit=2)
+					replaceWordListWithRandomSelf(mutatedCaptionData, randomList, "", word_change_limit=4)
 				if choice == 4:#synonyms replacement
-					replaceFromDictionary(mutatedCaptionData, synonyms, "", word_change_limit=2)
+					replaceFromDictionary(mutatedCaptionData, synonyms, "", word_change_limit=4)
 				if choice == 5:#antonyms replacement
-					replaceFromDictionary(mutatedCaptionData, antonyms, "", word_change_limit=2)
+					replaceFromDictionary(mutatedCaptionData, antonyms, "", word_change_limit=4)
 				if choice == 6:
 					pass
 				# print("MUTATION " + mutatedCaptionData[0][0])

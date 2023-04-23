@@ -104,9 +104,10 @@ def get_results(experiment_name, check_human):
 			pass
 		num_changed+=np.float32(num_ch[i])#How many characters cut off
 
+	accuracy = (num_human / probs.size) if check_human else (1. - (num_human / probs.size))
 	with open(asr_pth, "a") as f:
 		f.write('\nAverage confidence:' + str(np.mean(probs)))
-		f.write('\nNumber human:' + f'Human: {num_human}, Mutation: {probs.size - num_human}')
+		f.write('\nNumber of images human:' + f'Human: {num_human}, Mutation: {probs.size - num_human}')
 		if check_human:
 			f.write('\nDetector accuracy:' + str(num_human / probs.size))
 		if not check_human:
@@ -121,7 +122,7 @@ def get_results(experiment_name, check_human):
 		print('Detector accuracy:', 1. - (num_human / probs.size))
 	print('Average number of changes:', num_changed / len(num_ch))
 	print('Number of Attacks Run:', probs.size)
-
+	return accuracy
 
 
 def get_graph_data(exp_name):

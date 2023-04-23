@@ -23,10 +23,12 @@ def replaceWords(dataset : Dataset, word_list : dict, count=1):
         for text in texts:
             text : str
             text = text.replace("[", "").replace("]", "").replace("'", "").replace('"', "")
-            amountToReplace = count
+            amountToReplace = int(count / 2)
             for word, replacement in word_list.items():
+                print("." + str(amountToReplace))
                 (text, numReplaced) = re.subn(word, replacement, text, amountToReplace)
                 amountToReplace -= numReplaced
+                print(str(amountToReplace))
                 if amountToReplace <= 0:
                     break
             textsBuffer.append(text)
